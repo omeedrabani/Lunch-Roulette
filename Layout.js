@@ -28,11 +28,10 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'gold'
+    backgroundColor: 'ivory'
   },
   body: {
     flex: 11,
     flexDirection: 'column',
-    backgroundColor: 'skyblue'
   }
 })

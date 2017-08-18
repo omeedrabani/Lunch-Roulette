@@ -5,13 +5,13 @@ export default class Header extends React.Component {
   render() {
     return (
       <View style={ this.props.style }>
-        <View style={ styles.leftButton }>
+        <View style={ styles.button }>
           { this.props.leftButton }
         </View>
         <View style={ styles.middle }>
           <Text>App Name & Logo</Text>
         </View>
-        <View style={ styles.rightButton }>
+        <View style={ styles.button }>
           { this.props.rightButton }
         </View>
       </View>
@@ -20,19 +20,15 @@ export default class Header extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  leftButton: {
-    flex: 1,
-    backgroundColor: 'steelblue'
-  },
   middle: {
     flex: 4,
-    backgroundColor: 'darkorange',
     alignSelf: 'stretch',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'turquoise',
   },
-  rightButton: {
+  button: {
     flex: 1,
-    backgroundColor: 'steelblue'
+    backgroundColor: 'skyblue'
   }
 })

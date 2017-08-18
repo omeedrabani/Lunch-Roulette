@@ -42,10 +42,6 @@ export default class Search extends React.Component {
   body() {
     return (
       <View style={ styles.body }>
-        <Text>
-          Search Body
-        </Text>
-
         <TouchableOpacity
           style={ styles.searchButton }
           onPress={ () => this.goPressed() }
@@ -104,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'khaki'
+    backgroundColor: 'ivory'
   },
   headerButton: {
     flex: 1,

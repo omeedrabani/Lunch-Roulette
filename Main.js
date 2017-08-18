@@ -3,6 +3,13 @@ import { Text, View, StyleSheet, TouchableOpacity, TouchableHighlight, Alert, Fl
 import Layout from './Layout.js';
 
 export default class Main extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showClearItems: false
+    }
+  }
+
   render() {
     return (
       <Layout
@@ -27,13 +34,38 @@ export default class Main extends React.Component {
   }
 
   rightButton() {
+    if (this.state.showClearItems) {
+      return this.clearItemsButton();
+    } else {
+      return this.buttonForClearItemsButton();
+    }
+  }
+
+  clearItemsButton() {
+    setTimeout(function() {
+      this.setState({ showClearItems: false });
+    }.bind(this), 1000);
+
+    return (
+      <TouchableOpacity
+        style={ styles.clearItemsButton }
+        onPress={ () => this.clearItemsAndHideClearItemsButton() }
+        underlayColor="white">
+        <Text>
+          Clear!
+        </Text>
+      </TouchableOpacity>
+    );
+  }
+
+  buttonForClearItemsButton() {
     return (
       <TouchableOpacity
         style={ styles.headerButton }
-        onPress={ this.props.clearItems }
+        onPress={ () => this.setState({ showClearItems: true }) }
         underlayColor="white">
         <Text>
-          Clear
+          Clear?
         </Text>
       </TouchableOpacity>
     );
@@ -42,14 +74,14 @@ export default class Main extends React.Component {
   body() {
     return (
       <View style={ styles.body }>
-        <TouchableOpacity
+        <TouchableHighlight
           style={ styles.searchButton }
           onPress={ () => this.props.changeView("Search") }
-          underlayColor="white">
-          <Text style={{  fontSize: 30, margin: 20 }}>
+          underlayColor="skyblue">
+          <Text style={{  fontSize: 30, margin: 20, color: 'ivory' }}>
             Search
           </Text>
-        </TouchableOpacity>
+        </TouchableHighlight>
 
         <View style={ styles.listContainer }>
           <FlatList
@@ -65,15 +97,20 @@ export default class Main extends React.Component {
   componentForItem(item) {
     return (
       <TouchableHighlight
-        onPress={ () => alert(item + " pressed!") }
-        underlayColor="white">
+        onPress={ () => alert(item.name + " pressed!") }
+        underlayColor="ivory">
         <View style={ styles.item }>
-          <Text style={ fontSize: 24 }>
+          <Text style={{ fontSize: 20 }}>
             { item.name }
           </Text>
         </View>
       </TouchableHighlight>
     );
+  }
+
+  clearItemsAndHideClearItemsButton() {
+    this.props.clearItems();
+    this.setState({ showClearItems: false });
   }
 }
 
@@ -82,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'khaki'
+    backgroundColor: 'ivory'
   },
   headerButton: {
     flex: 1,
@@ -90,12 +127,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  clearItemsButton: {
+    flex: 1,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'red'
+  },
   searchButton: {
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "lightseagreen",
-    margin: 20
+    backgroundColor: "royalblue",
+    margin: 10
   },
   listContainer: {
     flex: 1,
@@ -105,9 +149,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'stretch',
     justifyContent: 'center',
-    height: 100,
-    margin: 20,
+    height: 75,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 5,
+    marginBottom: 5,
     padding: 10,
-    backgroundColor: 'peru'
+    backgroundColor: 'lightcoral'
   }
 })
