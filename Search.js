@@ -19,19 +19,23 @@ import Layout from './Layout.js';
 */
 
 export default class Search extends React.Component {
+  startingState() {
+    return {
+      term: "",
+      location: "",
+      maxDistance: "", // TODO: change to int input format
+      cost: [false, false, false, false],
+      openNow: false,
+      limit: "" // TODO: change to int input format
+    };
+  }
+
   constructor(props) {
     super(props);
     if (this.props.searchParams) {
       this.state = this.props.searchParams;
     } else {
-      this.state = {
-        term: "",
-        location: "",
-        maxDistance: "", // TODO: change to int input format
-        cost: [false, false, false, false],
-        openNow: false,
-        limit: "" // TODO: change to int input format
-      };
+      this.state = this.startingState();
     }
   }
 
@@ -62,11 +66,9 @@ export default class Search extends React.Component {
     return (
       <TouchableOpacity
         style={ styles.headerButton }
-        onPress={ () => alert("Right button pressed!") }
+        onPress={ () => this.setState(this.startingState) }
         underlayColor="white">
-        <Text>
-          SearchRB
-        </Text>
+        <Text>Clear</Text>
       </TouchableOpacity>
     );
   }
