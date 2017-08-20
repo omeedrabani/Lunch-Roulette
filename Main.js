@@ -103,6 +103,9 @@ export default class Main extends React.Component {
           <Text style={{ fontSize: 20 }}>
             { item.name }
           </Text>
+          <Text style={{ fontSize: 20 }}>
+            Rating: { item.rating }
+          </Text>
         </View>
       </TouchableHighlight>
     );
@@ -152,8 +155,10 @@ const styles = StyleSheet.create({
   },
   item: {
     flex: 1,
+    flexDirection: 'row',
     alignSelf: 'stretch',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     height: 75,
     marginLeft: 10,
     marginRight: 10,
