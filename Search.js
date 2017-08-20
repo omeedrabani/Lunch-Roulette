@@ -5,7 +5,7 @@ import Layout from './Layout.js';
 export default class Search extends React.Component {
   render() {
     return (
-      <Layout 
+      <Layout
         leftButton={ this.leftButton() }
         rightButton={ this.rightButton() }
         body={ this.body() }
@@ -28,8 +28,8 @@ export default class Search extends React.Component {
 
   rightButton() {
     return (
-      <TouchableOpacity 
-        style={ styles.headerButton } 
+      <TouchableOpacity
+        style={ styles.headerButton }
         onPress={ () => alert("Right button pressed!") }
         underlayColor="white">
         <Text>

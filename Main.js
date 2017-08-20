@@ -97,7 +97,7 @@ export default class Main extends React.Component {
   componentForItem(item) {
     return (
       <TouchableHighlight
-        onPress={ () => alert(item.name + " pressed!") }
+        onPress={ () => this.showItem(item) }
         underlayColor="ivory">
         <View style={ styles.item }>
           <Text style={{ fontSize: 20 }}>
@@ -111,6 +111,11 @@ export default class Main extends React.Component {
   clearItemsAndHideClearItemsButton() {
     this.props.clearItems();
     this.setState({ showClearItems: false });
+  }
+
+  showItem(item) {
+    this.props.setItemToShow(item);
+    this.props.changeView("Item");
   }
 }
 

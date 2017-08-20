@@ -2,36 +2,41 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, AsyncStorage } from 'react-native';
 import Main from './Main.js';
 import Search from './Search.js';
+import Item from './Item.js';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       viewToShow: "Main",
-      items: []
+      items: [],
+      itemToShow: null
     };
 
-    this.changeView = this.changeView.bind(this);
-    this.addItem    = this.addItem.bind(this);
-    this.clearItems = this.clearItems.bind(this);
+    this.changeView    = this.changeView.bind(this);
+    this.addItem       = this.addItem.bind(this);
+    this.clearItems    = this.clearItems.bind(this);
+    this.setItemToShow = this.setItemToShow.bind(this);
   }
 
   render() {
     switch(this.state.viewToShow) {
-      case "Main": 
-        return this.renderMain();  
+      case "Main":
+        return this.renderMain();
       case "Search":
         return this.renderSearch();
+      case "Item":
+        return this.renderItem();
       default:
-        return this.renderOther();  
+        return this.renderOther();
     }
   }
 
   renderMain() {
     return (
       <View style={ styles.container }>
-        <Main changeView={ this.changeView } items={ this.state.items } clearItems={ this.clearItems }/>
+        <Main changeView={ this.changeView } items={ this.state.items } clearItems={ this.clearItems } setItemToShow={ this.setItemToShow }/>
       </View>
     );
   }
@@ -40,6 +45,14 @@ export default class App extends React.Component {
     return (
       <View style={ styles.container }>
         <Search changeView={ this.changeView } addItem={ this.addItem }/>
+      </View>
+    );
+  }
+
+  renderItem() {
+    return (
+      <View style={ styles.container }>
+        <Item changeView={ this.changeView } item={ this.state.itemToShow }/>
       </View>
     );
   }
@@ -68,6 +81,10 @@ export default class App extends React.Component {
 
   clearItems() {
     this.setState({ items: [] });
+  }
+
+  setItemToShow(item) {
+    this.setState({ itemToShow: item });
   }
 }
 
