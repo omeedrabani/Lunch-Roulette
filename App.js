@@ -46,7 +46,7 @@ export default class App extends React.Component {
   renderSearch() {
     return (
       <View style={ styles.container }>
-        <Search changeView={ this.changeView } addItem={ this.addItem } searchParams={ this.state.searchParams } setSearchParams={ this.setSearchParams }/>
+        <Search changeView={ this.changeView } addItem={ this.addItem } searchParams={ this.state.searchParams } setSearchParams={ this.setSearchParams } setItemToShow={ this.setItemToShow }/>
       </View>
     );
   }

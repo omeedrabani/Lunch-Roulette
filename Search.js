@@ -200,9 +200,11 @@ export default class Search extends React.Component {
   }
 
   goPressed() {
-    this.props.addItem(this.dummyItem());
+    var itemToAdd = this.dummyItem()
+    this.props.addItem(itemToAdd);
+    this.props.setItemToShow(itemToAdd);
     this.props.setSearchParams(this.state);
-    this.props.changeView("Main");
+    this.props.changeView("Item");
   }
 
   cancelPressed() {
