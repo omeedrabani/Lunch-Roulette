@@ -1,5 +1,6 @@
 import React from 'react';
-import { Text, View, ScrollView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Alert, TextInput, Picker, Keyboard } from 'react-native';
+import { Text, View, ScrollView, StyleSheet, TouchableOpacity, TouchableWithoutFeedback,
+         Alert, TextInput, Picker, Keyboard, Image } from 'react-native';
 import Layout from './Layout.js';
 
 /*
@@ -26,7 +27,8 @@ export default class Search extends React.Component {
       maxDistance: "", // TODO: change to int input format
       cost: [false, false, false, false],
       openNow: false,
-      limit: "" // TODO: change to int input format
+      limit: "", // TODO: change to int input format
+      showLoadingSpinner: false
     };
   }
 
@@ -40,12 +42,23 @@ export default class Search extends React.Component {
   }
 
   render() {
+    var body = this.state.showLoadingSpinner ? this.loadingSpinner() : this.body();
+
     return (
       <Layout
         leftButton={ this.leftButton() }
         rightButton={ this.rightButton() }
-        body={ this.body() }
+        body={ body }
       />
+    );
+  }
+
+  loadingSpinner() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Image source={ require('./assets/loading_spinner.gif') }
+               style={{ height: 30, width: 30 }}/>
+      </View>
     );
   }
 
@@ -202,11 +215,16 @@ export default class Search extends React.Component {
   }
 
   goPressed() {
+    this.setState({ showLoadingSpinner: true });
     var itemToAdd = this.dummyItem()
     this.props.addItem(itemToAdd);
-    this.props.setItemToShow(itemToAdd);
-    this.props.setSearchParams(this.state);
-    this.props.changeView("Item");
+
+    setTimeout(function() {
+      this.setState({ showLoadingSpinner: false });
+      this.props.setItemToShow(itemToAdd);
+      this.props.setSearchParams(this.state);
+      this.props.changeView("Item");
+    }.bind(this), 1500);
   }
 
   cancelPressed() {
