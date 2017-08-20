@@ -11,13 +11,15 @@ export default class App extends React.Component {
     this.state = {
       viewToShow: "Main",
       items: [],
-      itemToShow: null
+      itemToShow: null,
+      searchParams: null
     };
 
-    this.changeView    = this.changeView.bind(this);
-    this.addItem       = this.addItem.bind(this);
-    this.clearItems    = this.clearItems.bind(this);
-    this.setItemToShow = this.setItemToShow.bind(this);
+    this.changeView      = this.changeView.bind(this);
+    this.addItem         = this.addItem.bind(this);
+    this.clearItems      = this.clearItems.bind(this);
+    this.setItemToShow   = this.setItemToShow.bind(this);
+    this.setSearchParams = this.setSearchParams.bind(this);
   }
 
   render() {
@@ -44,7 +46,7 @@ export default class App extends React.Component {
   renderSearch() {
     return (
       <View style={ styles.container }>
-        <Search changeView={ this.changeView } addItem={ this.addItem }/>
+        <Search changeView={ this.changeView } addItem={ this.addItem } searchParams={ this.state.searchParams } setSearchParams={ this.setSearchParams }/>
       </View>
     );
   }
@@ -85,6 +87,10 @@ export default class App extends React.Component {
 
   setItemToShow(item) {
     this.setState({ itemToShow: item });
+  }
+
+  setSearchParams(params) {
+    this.setState({ searchParams: params });
   }
 }
 
